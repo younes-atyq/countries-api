@@ -1,0 +1,118 @@
+---
+import slugify from "../ts/slugify";
+import { type Country } from "../ts/types";
+
+const { country, countires } = Astro.props as {
+  country: Country;
+  countires: Country[];
+};
+const {
+  name,
+  tld,
+  currencies,
+  capital,
+  region,
+  subregion,
+  languages,
+  population,
+  flags,
+  borders,
+  maps,
+} = country;
+
+const nativeName = Object.values(name?.nativeName)[0]?.common || "";
+const topLevelDomain = tld ? tld[0] : "";
+
+const currencyNames = currencies
+  ? Object.values(currencies)
+      .map((c) => c.name)
+      .join(", ")
+  : "None";
+
+const borderCountries = borders
+  ? borders.map((border) => {
+      const borderCountry = countires.find((c) => c.cca3 === border);
+      return borderCountry
+        ? `/country/${slugify(borderCountry?.name?.common)}`
+        : "#";
+    })
+  : "";
+---
+
+<div class="container country-info-container">
+  <a href="/" class="back" id="back-btn" title="Back">
+    <span class="arrow">←</span> Back
+  </a>
+  <div class="country-info">
+    <div class="image">
+      <a href={maps.googleMaps} target="_blank" title="View on Google Maps"></a>
+
+      <img
+        src={flags.png}
+        alt={name.common}
+        transition:name={name.common + "-img"}
+      />
+    </div>
+    <div class="info">
+      <h1>{name.common}</h1>
+      <div class="lists">
+        <ul class="list">
+          <li>
+            <span>Native Name:</span>
+            <span>{nativeName}</span>
+          </li>
+          <li>
+            <span>Population:</span>
+            <span>{population ? population.toLocaleString() : "0"}</span>
+          </li>
+          <li>
+            <span>Region:</span>
+            <span>{region || "None"}</span>
+          </li>
+          <li>
+            <span>Sub Region:</span>
+            <span>{subregion || "None"}</span>
+          </li>
+          <li>
+            <span>Capital:</span>
+            <span>{capital ? capital : "None"}</span>
+          </li>
+        </ul>
+        <ul class="list">
+          <li>
+            <span>Top Level Domain:</span>
+            <span>{topLevelDomain || "None"}</span>
+          </li>
+          <li>
+            <span>Currencies:</span>
+            <span>{currencyNames || "None"}</span>
+          </li>
+          <li>
+            <span>Languages:</span>
+            <span>{Object.values(languages).join(", ")}</span>
+          </li>
+        </ul>
+      </div>
+      <div class="borders">
+        <span>Border Countries:</span>
+        <ul>
+          {
+            borders ? (
+              borders.map((border, i) => {
+                return (
+                  <li>
+                    <a href={borderCountries[i]} class="link" title={border}>
+                      {border}
+                    </a>
+                  </li>
+                );
+              })
+            ) : (
+              <li>None</li>
+            )
+          }
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

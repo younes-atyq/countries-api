@@ -1,0 +1,58 @@
+// import OpenSans font
+@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;600;800&display=swap");
+$font-family: "Nunito Sans", sans-serif;
+
+:root {
+  --text: hsl(200, 15%, 8%);
+  --background: hsl(0, 0%, 98%);
+  --elements: $hsl(0, 0%, 100%);
+  --input: hsl(0, 0%, 52%);
+  --shadow: hsl(0deg 0% 74.16%);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --text: hsl(0, 0%, 100%);
+    --background: hsl(207, 26%, 17%);
+    --elements: hsl(209, 23%, 22%);
+    --input: hsl(0, 0%, 100%);
+    --shadow: hsl(208, 26%, 14%);
+    // --input: $dm-input;
+  }
+  #select-img-icon {
+    filter: invert(1);
+  }
+}
+@media (prefers-color-scheme: light) {
+  :root {
+    --text: hsl(200, 15%, 8%);
+    --background: hsl(0, 0%, 98%);
+    --elements: hsl(0, 0%, 100%);
+    --input: hsl(0, 0%, 52%);
+    --shadow: hsl(0deg 0% 74.16%);
+  }
+}
+:root[data-theme="dark"] {
+  --text: hsl(0, 0%, 100%);
+  --background: hsl(207, 26%, 17%);
+  --elements: hsl(209, 23%, 22%);
+  --input: hsl(0, 0%, 100%);
+  --shadow: hsl(208, 26%, 14%);
+}
+:root[data-theme="light"] {
+  --text: hsl(200, 15%, 8%);
+  --background: hsl(0, 0%, 98%);
+  --elements: hsl(0, 0%, 100%);
+  --input: hsl(0, 0%, 52%);
+  --shadow: hsl(0deg 0% 74.16%);
+}
+
+// spacing
+$section-padding: 100px;
+
+// transition
+$delay: 0.3s ease;
+
+// radius
+$radius: 10px;
+$rounded: 50%;

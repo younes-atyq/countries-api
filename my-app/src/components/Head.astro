@@ -1,0 +1,45 @@
+---
+import { Icon } from "astro-icon/components";
+---
+
+<header id="header">
+  <div class="container">
+    <span>Where in the world?</span>
+    <button id="theme-toggle">
+      <Icon id={"theme-toggle-icon"} name={"cresent"} />
+      Dark Mode
+    </button>
+  </div>
+</header>
+
+<script>
+  document.addEventListener("astro:page-load", () => {
+    const getTheme = (): string => {
+      const theme = localStorage.getItem("theme")
+        ? localStorage.getItem("theme")
+        : window.matchMedia("(prefers-color-scheme: dark)").matches
+          ? "dark"
+          : "light";
+      return theme || "light";
+    };
+    document.documentElement.setAttribute("data-theme", getTheme());
+    const toggleTheme = () => {
+      const theme: string = getTheme() === "light" ? "dark" : "light";
+      document.documentElement.setAttribute("data-theme", theme);
+      localStorage.setItem("theme", theme);
+    };
+    const themeToggle = document.getElementById("theme-toggle");
+    themeToggle?.addEventListener("click", toggleTheme);
+  });
+</script>
+<script is:inline>
+  const getTheme = () => {
+    const theme = localStorage.getItem("theme")
+      ? localStorage.getItem("theme")
+      : window.matchMedia("(prefers-color-scheme: dark)").matches
+        ? "dark"
+        : "light";
+    return theme || "light";
+  };
+  document.documentElement.setAttribute("data-theme", getTheme());
+</script>

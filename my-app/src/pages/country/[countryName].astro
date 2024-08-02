@@ -1,0 +1,30 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import slugify from "../../ts/slugify.ts";
+import CountryInf from "../../components/countryInf.astro";
+import { type Country } from "../../ts/types.ts";
+
+export async function getStaticPaths() {
+  const res = await fetch("https://restcountries.com/v3.1/all");
+  const countries = await res.json();
+  return countries.map((country: Country) => ({
+    params: {
+      countryName: slugify(country.name.common),
+    },
+    props: {
+      country: country,
+      countries: countries,
+    },
+  }));
+}
+
+// const { countryName } = Astro.params as { countryName: string };
+const { country, countries } = Astro.props as {
+  country: Country;
+  countries: Country[];
+};
+---
+
+<Layout title={`About ${country.name.common}`}>
+  <CountryInf country={country} countires={countries} />
+</Layout>

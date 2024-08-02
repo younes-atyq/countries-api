@@ -7,20 +7,23 @@ const { country, countires } = Astro.props as {
   countires: Country[];
 };
 const {
-  name,
-  tld,
-  currencies,
-  capital,
-  region,
-  subregion,
-  languages,
-  population,
-  flags,
-  borders,
-  maps,
+  name = { nativeName: "", common: "" },
+  tld = [],
+  currencies = [],
+  capital = [],
+  region = "",
+  subregion = "",
+  languages = [],
+  population = 0,
+  flags = { png: "" },
+  borders = [],
+  maps = { googleMaps: "" },
+  cca3 = "",
 } = country;
-
-const nativeName = Object.values(name?.nativeName)[0]?.common || "";
+console.log(cca3);
+const nativeName = name?.nativeName
+  ? Object.values(name?.nativeName)[0]?.common
+  : "";
 const topLevelDomain = tld ? tld[0] : "";
 
 const currencyNames = currencies

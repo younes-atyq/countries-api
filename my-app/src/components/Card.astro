@@ -14,7 +14,7 @@ const { countryName, flag, population, region, capital } = Astro.props as Props;
 ---
 
 <div class="card show" id={countryName} data-contient={region.toLowerCase()}>
-  <a href={`country/${slugify(countryName)}`}> </a>
+  <a href={`/country/${slugify(countryName)}`}> </a>
   <div class="card-img">
     <Image
       width={250}

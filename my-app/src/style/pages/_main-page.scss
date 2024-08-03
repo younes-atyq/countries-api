@@ -3,227 +3,227 @@
 #main-page {
   background-color: var(--background);
   margin-bottom: 50px;
-  .search-container {
-    margin-block: 50px;
+}
+.search-container {
+  margin-block: 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  @include mq("md") {
+    flex-direction: column;
+    margin-block: 30px;
+    gap: 20px;
+    justify-content: start;
+    align-items: start;
+  }
+  .search-bar {
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    gap: 10px;
+    padding-inline: 20px;
+    border-radius: 3px;
+    box-shadow: 0 1px 3px 1px var(--shadow);
+    height: 54px;
+    background-color: var(--elements);
     @include mq("md") {
-      flex-direction: column;
-      margin-block: 30px;
-      gap: 20px;
-      justify-content: start;
-      align-items: start;
+      width: 100%;
     }
-    .search-bar {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding-inline: 20px;
-      border-radius: 3px;
-      box-shadow: 0 1px 3px 1px var(--shadow);
-      height: 54px;
-      background-color: var(--elements);
+    .search-icon {
+      stroke-width: 5;
+      stroke: var(--text);
+    }
+    .search-input {
+      background-color: transparent;
+      border: none;
+      outline: none;
+      padding: 15px 10px;
+      width: 300px;
+      color: var(--text);
+      &::placeholder {
+        color: var(--text);
+      }
       @include mq("md") {
         width: 100%;
       }
-      .search-icon {
-        stroke-width: 5;
-        stroke: var(--text);
-      }
-      .search-input {
-        background-color: transparent;
-        border: none;
-        outline: none;
-        padding: 15px 10px;
-        width: 300px;
-        color: var(--text);
-        &::placeholder {
-          color: var(--text);
-        }
-        @include mq("md") {
-          width: 100%;
-        }
-      }
-    }
-    .filter {
-      background-color: var(--background);
-      border: none;
-      outline: none;
-      padding: 20px 15px;
-      border-radius: 3px;
-      width: 200px;
-      box-shadow: 0 1px 3px 1px var(--shadow);
-      cursor: pointer;
-      &::after {
-        content: "\25BC";
-        position: absolute;
-        top: 0;
-        right: 0;
-        padding: 10px;
-      }
-      option {
-        background-color: var(--background);
-        color: var(--text);
-      }
-    }
-    .select-box {
-      position: relative;
-      display: block;
-      width: 200px;
-      font-size: 18px;
-      color: var(--text);
-      z-index: 100;
-      background-color: var(--elements);
-    }
-
-    .select-box__current {
-      position: relative;
-      box-shadow: 0px 0px 5px 0px var(--shadow);
-      cursor: pointer;
-      outline: none;
-    }
-    .select-box__current:focus + .select-box__list {
-      opacity: 1;
-      -webkit-animation-name: none;
-      animation-name: none;
-    }
-    .select-box__current:focus + .select-box__list .select-box__option {
-      cursor: pointer;
-    }
-    .select-box__current:focus .select-box__icon {
-      -webkit-transform: translateY(-50%) rotate(180deg);
-      transform: translateY(-50%) rotate(180deg);
-    }
-    .select-box__icon {
-      position: absolute;
-      top: 50%;
-      right: 15px;
-      -webkit-transform: translateY(-50%);
-      transform: translateY(-50%);
-      width: 20px;
-      opacity: 0.3;
-      transition: 0.2s ease;
-    }
-    .select-box__value {
-      display: flex;
-    }
-    .select-box__input {
-      display: none;
-    }
-    .select-box__input:checked + .select-box__input-text {
-      display: block;
-    }
-    .select-box__input-text {
-      display: none;
-      width: 100%;
-      margin: 0;
-      padding: 15px;
-      background-color: var(--elements);
-    }
-    .select-box__list {
-      position: absolute;
-      width: 100%;
-      padding: 0;
-      list-style: none;
-      opacity: 0;
-      -webkit-animation-name: HideList;
-      animation-name: HideList;
-      -webkit-animation-duration: 0.5s;
-      animation-duration: 0.5s;
-      -webkit-animation-delay: 0.5s;
-      animation-delay: 0.5s;
-      -webkit-animation-fill-mode: forwards;
-      animation-fill-mode: forwards;
-      -webkit-animation-timing-function: step-start;
-      animation-timing-function: step-start;
-      box-shadow: 0 15px 30px -10px var(--shadow);
-    }
-    .select-box__option {
-      display: block;
-      padding: 15px;
-      background-color: var(--elements);
-    }
-    .select-box__option:hover,
-    .select-box__option:focus {
-      color: var(--text);
-      background-color: var(--background);
-    }
-
-    @-webkit-keyframes HideList {
-      from {
-        -webkit-transform: scaleY(1);
-        transform: scaleY(1);
-      }
-      to {
-        -webkit-transform: scaleY(0);
-        transform: scaleY(0);
-      }
-    }
-
-    @keyframes HideList {
-      from {
-        -webkit-transform: scaleY(1);
-        transform: scaleY(1);
-      }
-      to {
-        -webkit-transform: scaleY(0);
-        transform: scaleY(0);
-      }
     }
   }
-  .cards-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, 250px);
-    justify-content: center;
-    row-gap: 50px;
-    column-gap: 36px;
-    .card {
-      background-color: var(--elements);
-      border-top-left-radius: $radius;
-      border-top-right-radius: $radius;
-      overflow: hidden;
-      box-shadow: 0 1px 3px 1px var(--shadow);
-      cursor: pointer;
-      transition: transform $delay;
-      position: relative;
-      display: none;
-      a {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        z-index: 10;
+  .filter {
+    background-color: var(--background);
+    border: none;
+    outline: none;
+    padding: 20px 15px;
+    border-radius: 3px;
+    width: 200px;
+    box-shadow: 0 1px 3px 1px var(--shadow);
+    cursor: pointer;
+    &::after {
+      content: "\25BC";
+      position: absolute;
+      top: 0;
+      right: 0;
+      padding: 10px;
+    }
+    option {
+      background-color: var(--background);
+      color: var(--text);
+    }
+  }
+  .select-box {
+    position: relative;
+    display: block;
+    width: 200px;
+    font-size: 18px;
+    color: var(--text);
+    z-index: 100;
+    background-color: var(--elements);
+  }
+
+  .select-box__current {
+    position: relative;
+    box-shadow: 0px 0px 5px 0px var(--shadow);
+    cursor: pointer;
+    outline: none;
+  }
+  .select-box__current:focus + .select-box__list {
+    opacity: 1;
+    -webkit-animation-name: none;
+    animation-name: none;
+  }
+  .select-box__current:focus + .select-box__list .select-box__option {
+    cursor: pointer;
+  }
+  .select-box__current:focus .select-box__icon {
+    -webkit-transform: translateY(-50%) rotate(180deg);
+    transform: translateY(-50%) rotate(180deg);
+  }
+  .select-box__icon {
+    position: absolute;
+    top: 50%;
+    right: 15px;
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+    width: 20px;
+    opacity: 0.3;
+    // transition: 0.2s ease;
+  }
+  .select-box__value {
+    display: flex;
+  }
+  .select-box__input {
+    display: none;
+  }
+  .select-box__input:checked + .select-box__input-text {
+    display: block;
+  }
+  .select-box__input-text {
+    display: none;
+    width: 100%;
+    margin: 0;
+    padding: 15px;
+    background-color: var(--elements);
+  }
+  .select-box__list {
+    position: absolute;
+    width: 100%;
+    padding: 0;
+    list-style: none;
+    opacity: 0;
+    -webkit-animation-name: HideList;
+    animation-name: HideList;
+    -webkit-animation-duration: 0.5s;
+    animation-duration: 0.5s;
+    -webkit-animation-delay: 0.5s;
+    animation-delay: 0.5s;
+    -webkit-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
+    -webkit-animation-timing-function: step-start;
+    animation-timing-function: step-start;
+    box-shadow: 0 15px 30px -10px var(--shadow);
+  }
+  .select-box__option {
+    display: block;
+    padding: 15px;
+    background-color: var(--elements);
+  }
+  .select-box__option:hover,
+  .select-box__option:focus {
+    color: var(--text);
+    background-color: var(--background);
+  }
+
+  @-webkit-keyframes HideList {
+    from {
+      -webkit-transform: scaleY(1);
+      transform: scaleY(1);
+    }
+    to {
+      -webkit-transform: scaleY(0);
+      transform: scaleY(0);
+    }
+  }
+
+  @keyframes HideList {
+    from {
+      -webkit-transform: scaleY(1);
+      transform: scaleY(1);
+    }
+    to {
+      -webkit-transform: scaleY(0);
+      transform: scaleY(0);
+    }
+  }
+}
+.cards-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 250px);
+  justify-content: center;
+  row-gap: 50px;
+  column-gap: 36px;
+  .card {
+    background-color: var(--elements);
+    border-top-left-radius: $radius;
+    border-top-right-radius: $radius;
+    overflow: hidden;
+    box-shadow: 0 1px 3px 1px var(--shadow);
+    cursor: pointer;
+    transition: transform $delay;
+    position: relative;
+    display: none;
+    a {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 10;
+    }
+    &.show {
+      display: block;
+    }
+    &:hover {
+      transition: transform $delay, box-shadow $delay;
+      box-shadow: 0 1px 10px 3px var(--shadow);
+      transform: translate(0, -5px);
+    }
+    .card-img {
+      width: 100%;
+      height: 150px;
+      object-fit: cover;
+      box-shadow: 0 0px 2px 0px var(--shadow);
+    }
+    .card-info {
+      padding: 20px;
+      h3 {
+        font-weight: 800;
+        margin-bottom: 20px;
       }
-      &.show {
-        display: block;
-      }
-      &:hover {
-        transition: transform $delay, box-shadow $delay;
-        box-shadow: 0 1px 10px 3px var(--shadow);
-        transform: translate(0, -5px);
-      }
-      .card-img {
-        width: 100%;
-        height: 150px;
-        object-fit: cover;
-        box-shadow: 0 0px 2px 0px var(--shadow);
-      }
-      .card-info {
-        padding: 20px;
-        h3 {
-          font-weight: 800;
-          margin-bottom: 20px;
-        }
-        ul {
-          li {
-            font-size: 14px;
-            span:first-child {
-              font-weight: 600;
-              display: inline-block;
-              margin-bottom: 5px;
-            }
+      ul {
+        li {
+          font-size: 14px;
+          span:first-child {
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 5px;
           }
         }
       }

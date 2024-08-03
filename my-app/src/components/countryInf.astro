@@ -18,9 +18,8 @@ const {
   flags = { png: "" },
   borders = [],
   maps = { googleMaps: "" },
-  cca3 = "",
 } = country;
-console.log(cca3);
+// console.log(cca3);
 const nativeName = name?.nativeName
   ? Object.values(name?.nativeName)[0]?.common
   : "";
@@ -43,9 +42,9 @@ const borderCountries = borders
 ---
 
 <div class="container country-info-container">
-  <a href="/" class="back" id="back-btn" title="Back">
+  <button class="back" id="back-btn" title="Back">
     <span class="arrow">←</span> Back
-  </a>
+  </button>
   <div class="country-info">
     <div class="image">
       <a href={maps.googleMaps} target="_blank" title="View on Google Maps"></a>
@@ -119,3 +118,11 @@ const borderCountries = borders
     </div>
   </div>
 </div>
+<script>
+  document.addEventListener("astro:page-load", () => {
+    const backBtn = document.getElementById("back-btn");
+    backBtn?.addEventListener("click", () => {
+      window.history.back();
+    });
+  });
+</script>

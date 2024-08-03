@@ -1,0 +1,211 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Card from "../../components/Card.astro";
+import { type Country } from "../../ts/types.ts";
+import { Icon } from "astro-icon/components";
+
+export async function getStaticPaths() {
+  return [
+    { params: { region: "africa" } },
+    { params: { region: "americas" } },
+    { params: { region: "asia" } },
+    { params: { region: "europe" } },
+    { params: { region: "oceania" } },
+    { params: { region: "antarctic" } },
+  ];
+}
+
+const region = Astro.params.region;
+
+const res = await fetch(`https://restcountries.com/v3.1/region/${region}`);
+const data = (await res.json()) as Country[];
+---
+
+<Layout title={`${region}`}>
+  <div class="search-container container">
+    <div class="search-bar">
+      <Icon id={"search-icon"} name={"search-icon"} />
+      <form id="form">
+        <input
+          type="text"
+          placeholder="Search for a country..."
+          class="search-input"
+          id="searchTerm"
+          max="24"
+        />
+      </form>
+    </div>
+    <div class="select-box">
+      <div class="select-box__current" tabindex="1">
+        <div class="select-box__value">
+          <input
+            class="select-box__input"
+            type="radio"
+            id="0"
+            value="1"
+            name="Ben"
+          />
+          <p class="select-box__input-text">Filter by Region</p>
+        </div>
+        <div class="select-box__value">
+          <input
+            class="select-box__input"
+            type="radio"
+            id="1"
+            value="2"
+            name="Ben"
+            checked={region === "africa"}
+          />
+          <p class="select-box__input-text">Africa</p>
+        </div>
+        <div class="select-box__value">
+          <input
+            class="select-box__input"
+            type="radio"
+            id="2"
+            value="3"
+            name="Ben"
+            checked={region === "americas"}
+          />
+          <p class="select-box__input-text">Americas</p>
+        </div>
+        <div class="select-box__value">
+          <input
+            class="select-box__input"
+            type="radio"
+            id="3"
+            value="4"
+            name="Ben"
+            checked={region === "asia"}
+          />
+          <p class="select-box__input-text">Asia</p>
+        </div>
+        <div class="select-box__value">
+          <input
+            class="select-box__input"
+            type="radio"
+            id="4"
+            value="5"
+            name="Ben"
+            checked={region === "europe"}
+          />
+          <p class="select-box__input-text">Europe</p>
+        </div>
+        <div class="select-box__value">
+          <input
+            class="select-box__input"
+            type="radio"
+            id="5"
+            value="6"
+            name="Ben"
+            checked={region === "oceania"}
+          />
+          <p class="select-box__input-text">Oceania</p>
+        </div>
+        <div class="select-box__value">
+          <input
+            class="select-box__input"
+            type="radio"
+            id="6"
+            value="7"
+            name="Ben"
+            checked={region === "antarctic"}
+          />
+          <p class="select-box__input-text">Antarctic</p>
+        </div>
+        <div class="select-box__value">
+          <!-- <input
+            class="select-box__input"
+            type="radio"
+            id="7"
+            value="8"
+            name="Ben"
+          /> -->
+          <p class="select-box__input-text">All</p>
+        </div>
+        <img
+          id="select-img-icon"
+          class="select-box__icon"
+          src="http://cdn.onlinewebfonts.com/svg/img_295694.svg"
+          alt="Arrow Icon"
+          aria-hidden="true"
+        />
+      </div>
+      <ul class="select-box__list">
+        <li>
+          <a class="select-box__option" aria-hidden="true" href="/region/africa"
+            >Africa</a
+          >
+        </li>
+        <li>
+          <a
+            class="select-box__option"
+            aria-hidden="true"
+            href="/region/americas">Americas</a
+          >
+        </li>
+        <li>
+          <a class="select-box__option" aria-hidden="true" href="/region/asia"
+            >Asia</a
+          >
+        </li>
+        <li>
+          <a class="select-box__option" aria-hidden="true" href="/region/europe"
+            >Europe</a
+          >
+        </li>
+        <li>
+          <a
+            class="select-box__option"
+            aria-hidden="true"
+            href="/region/oceania">Oceania</a
+          >
+        </li>
+        <li>
+          <a
+            class="select-box__option"
+            aria-hidden="true"
+            href="/region/antarctic">Antarctic</a
+          >
+        </li>
+        <li>
+          <a class="select-box__option" aria-hidden="true" href="/">All</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="cards-container container">
+    {
+      data.map((country: Country) => (
+        <Card
+          countryName={country.name.common}
+          flag={country.flags.png}
+          capital={country.capital}
+          population={country.population}
+          region={country.region}
+        />
+      ))
+    }
+  </div>
+  <script>
+    document.addEventListener("astro:page-load", () => {
+      const form = document.forms[0];
+      const cards = document.querySelectorAll(".card");
+
+      form?.addEventListener("keyup", (e: Event) => {
+        e.preventDefault();
+        const searchTerm = (e.target as HTMLFormElement).value;
+        if (searchTerm.length === 0)
+          return cards.forEach((card) => card.classList.add("show"));
+
+        cards.forEach((card) => {
+          if (card.id.toLowerCase().includes(searchTerm.toLowerCase())) {
+            card.classList.add("show");
+          } else {
+            card.classList.remove("show");
+          }
+        });
+      });
+    });
+  </script>
+</Layout>

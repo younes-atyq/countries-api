@@ -124,39 +124,47 @@ const data = shuffledData.sort((a: Country, b: Country) =>
         </div>
         <ul class="select-box__list">
           <li>
-            <label class="select-box__option" for="1" aria-hidden="true"
-              >Africa</label
+            <a
+              class="select-box__option"
+              aria-hidden="true"
+              href="/region/africa">Africa</a
             >
           </li>
           <li>
-            <label class="select-box__option" for="2" aria-hidden="true"
-              >Americas</label
+            <a
+              class="select-box__option"
+              aria-hidden="true"
+              href="/region/americas">Americas</a
             >
           </li>
           <li>
-            <label class="select-box__option" for="3" aria-hidden="true"
-              >Asia</label
+            <a class="select-box__option" aria-hidden="true" href="/region/asia"
+              >Asia</a
             >
           </li>
           <li>
-            <label class="select-box__option" for="4" aria-hidden="true"
-              >Europe</label
+            <a
+              class="select-box__option"
+              aria-hidden="true"
+              href="/region/europe">Europe</a
             >
           </li>
           <li>
-            <label class="select-box__option" for="5" aria-hidden="true"
-              >Oceania</label
+            <a
+              class="select-box__option"
+              aria-hidden="true"
+              href="/region/oceania">Oceania</a
             >
           </li>
           <li>
-            <label class="select-box__option" for="6" aria-hidden="true"
-              >Antarctic</label
+            <a
+              class="select-box__option"
+              aria-hidden="true"
+              href="/region/antarctic">Antarctic</a
             >
           </li>
           <li>
-            <label class="select-box__option" for="7" aria-hidden="true"
-              >All</label
-            >
+            <a class="select-box__option" aria-hidden="true" href="/">All</a>
           </li>
         </ul>
       </div>
@@ -204,8 +212,52 @@ const data = shuffledData.sort((a: Country, b: Country) =>
     });
   </script>
 
-  <!--  -->
+  <!-- Handle filter by continent -->
+  <script is:inline>
+    document.addEventListener("astro:page-load", () => {
+      const selectedContinent = sessionStorage.getItem("continent");
+      const continentList = [
+        "africa",
+        "americas",
+        "asia",
+        "europe",
+        "oceania",
+        "antarctic",
+        "all",
+      ];
+      const continentInput = document.querySelectorAll("input[name=Ben]");
+      continentInput.forEach((input) => {
+        console.log(continentList[+input.value - 2] === selectedContinent);
+        if (continentList[+input.value - 2] === selectedContinent) {
+          input.checked = true;
+        }
+      });
+    });
+  </script>
   <script>
+    document.addEventListener("astro:page-load", () => {
+      const continentInput = document.querySelectorAll("input[name=Ben]");
+      const continentList = [
+        "africa",
+        "americas",
+        "asia",
+        "europe",
+        "oceania",
+        "antarctic",
+        "all",
+      ];
+      continentInput.forEach((input) => {
+        input.addEventListener("change", (e) => {
+          const theSelectedContinent =
+            continentList[+(e.target as HTMLInputElement).value - 2];
+
+          sessionStorage.setItem("continent", theSelectedContinent);
+        });
+      });
+    });
+  </script>
+  <!-- Handle filter by continent -->
+  <!-- <script>
     document.addEventListener("astro:page-load", () => {
       const continentInput = document.querySelectorAll("input[name=Ben]");
       const continentList = [
@@ -239,22 +291,7 @@ const data = shuffledData.sort((a: Country, b: Country) =>
       });
     });
   </script>
-  <script is:inline>
-    const cards = document.querySelectorAll(".card");
-    if (selectedContinent === "all") {
-      cards.forEach((card) => card.classList.add("show"));
-    } else {
-      cards.forEach((card) => {
-        if (card.getAttribute("data-contient") === selectedContinent) {
-          card.classList.add("show");
-        } else {
-          card.classList.remove("show");
-        }
-      });
-    }
-  </script>
 
-  <!-- THEME -->
   <script is:inline>
     const selectedContinent = sessionStorage.getItem("continent");
     if (selectedContinent) {
@@ -322,5 +359,5 @@ const data = shuffledData.sort((a: Country, b: Country) =>
         }
       }
     });
-  </script>
+  </script> -->
 </Layout>

@@ -19,10 +19,8 @@ $font-family: "Nunito Sans", sans-serif;
     --shadow: hsl(208, 26%, 14%);
     // --input: $dm-input;
   }
-  #select-img-icon {
-    filter: invert(1);
-  }
 }
+
 @media (prefers-color-scheme: light) {
   :root {
     --text: hsl(200, 15%, 8%);
@@ -38,6 +36,9 @@ $font-family: "Nunito Sans", sans-serif;
   --elements: hsl(209, 23%, 22%);
   --input: hsl(0, 0%, 100%);
   --shadow: hsl(208, 26%, 14%);
+  #select-img-icon {
+    filter: invert(1);
+  }
 }
 :root[data-theme="light"] {
   --text: hsl(200, 15%, 8%);

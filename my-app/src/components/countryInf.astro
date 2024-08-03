@@ -49,11 +49,8 @@ const borderCountries = borders
     <div class="image">
       <a href={maps.googleMaps} target="_blank" title="View on Google Maps"></a>
 
-      <img
-        src={flags.png}
-        alt={name.common}
-        transition:name={name.common + "-img"}
-      />
+      <img src={flags.png} alt={name.common} />
+      <!-- transition:name={name.common + "-img"} -->
     </div>
     <div class="info">
       <h1>{name.common}</h1>
@@ -117,12 +114,10 @@ const borderCountries = borders
       </div>
     </div>
   </div>
-</div>
-<script>
-  document.addEventListener("astro:page-load", () => {
+  <script>
     const backBtn = document.getElementById("back-btn");
     backBtn?.addEventListener("click", () => {
       window.history.back();
     });
-  });
-</script>
+  </script>
+</div>

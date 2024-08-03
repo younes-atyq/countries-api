@@ -12,12 +12,16 @@ export async function getStaticPaths() {
     { params: { region: "europe" } },
     { params: { region: "oceania" } },
     { params: { region: "antarctic" } },
+    { params: { region: "all" } },
   ];
 }
 
 const region = Astro.params.region;
 
-const res = await fetch(`https://restcountries.com/v3.1/region/${region}`);
+const res =
+  region === "all"
+    ? await fetch("https://restcountries.com/v3.1/all")
+    : await fetch(`https://restcountries.com/v3.1/region/${region}`);
 const data = (await res.json()) as Country[];
 ---
 
@@ -114,13 +118,14 @@ const data = (await res.json()) as Country[];
           <p class="select-box__input-text">Antarctic</p>
         </div>
         <div class="select-box__value">
-          <!-- <input
+          <input
             class="select-box__input"
             type="radio"
             id="7"
             value="8"
             name="Ben"
-          /> -->
+            checked={region === "all"}
+          />
           <p class="select-box__input-text">All</p>
         </div>
         <img
@@ -169,7 +174,9 @@ const data = (await res.json()) as Country[];
           >
         </li>
         <li>
-          <a class="select-box__option" aria-hidden="true" href="/">All</a>
+          <a class="select-box__option" aria-hidden="true" href="/region/all"
+            >All</a
+          >
         </li>
       </ul>
     </div>
@@ -188,23 +195,21 @@ const data = (await res.json()) as Country[];
     }
   </div>
   <script>
-    document.addEventListener("astro:page-load", () => {
-      const form = document.forms[0];
-      const cards = document.querySelectorAll(".card");
+    const form = document.forms[0];
+    const cards = document.querySelectorAll(".card");
 
-      form?.addEventListener("keyup", (e: Event) => {
-        e.preventDefault();
-        const searchTerm = (e.target as HTMLFormElement).value;
-        if (searchTerm.length === 0)
-          return cards.forEach((card) => card.classList.add("show"));
+    form?.addEventListener("keyup", (e: Event) => {
+      e.preventDefault();
+      const searchTerm = (e.target as HTMLFormElement).value;
+      if (searchTerm.length === 0)
+        return cards.forEach((card) => card.classList.add("show"));
 
-        cards.forEach((card) => {
-          if (card.id.toLowerCase().includes(searchTerm.toLowerCase())) {
-            card.classList.add("show");
-          } else {
-            card.classList.remove("show");
-          }
-        });
+      cards.forEach((card) => {
+        if (card.id.toLowerCase().includes(searchTerm.toLowerCase())) {
+          card.classList.add("show");
+        } else {
+          card.classList.remove("show");
+        }
       });
     });
   </script>

@@ -38,17 +38,10 @@ const data = shuffledData.sort((a: Country, b: Country) =>
       <div class="select-box">
         <div class="select-box__current" tabindex="1">
           <div class="select-box__value">
-            <input
-              class="select-box__input"
-              type="radio"
-              id="0"
-              value="1"
-              name="Ben"
-              checked="checked"
-            />
+            <input class="select-box__input" type="radio" checked="checked" />
             <p class="select-box__input-text">Filter by Region</p>
           </div>
-          <div class="select-box__value">
+          <!-- <div class="select-box__value">
             <input
               class="select-box__input"
               type="radio"
@@ -117,60 +110,36 @@ const data = shuffledData.sort((a: Country, b: Country) =>
               name="Ben"
             />
             <p class="select-box__input-text">All</p>
-          </div>
+          </div> -->
           <img
             id="select-img-icon"
             class="select-box__icon"
             src="http://cdn.onlinewebfonts.com/svg/img_295694.svg"
             alt="Arrow Icon"
-            aria-hidden="true"
           />
         </div>
+
         <ul class="select-box__list">
           <li>
-            <a
-              class="select-box__option"
-              aria-hidden="true"
-              href="/region/africa">Africa</a
-            >
+            <a class="select-box__option" href="/region/africa">Africa</a>
           </li>
           <li>
-            <a
-              class="select-box__option"
-              aria-hidden="true"
-              href="/region/americas">Americas</a
-            >
+            <a class="select-box__option" href="/region/americas">Americas</a>
           </li>
           <li>
-            <a class="select-box__option" aria-hidden="true" href="/region/asia"
-              >Asia</a
-            >
+            <a class="select-box__option" href="/region/asia">Asia</a>
           </li>
           <li>
-            <a
-              class="select-box__option"
-              aria-hidden="true"
-              href="/region/europe">Europe</a
-            >
+            <a class="select-box__option" href="/region/europe">Europe</a>
           </li>
           <li>
-            <a
-              class="select-box__option"
-              aria-hidden="true"
-              href="/region/oceania">Oceania</a
-            >
+            <a class="select-box__option" href="/region/oceania">Oceania</a>
           </li>
           <li>
-            <a
-              class="select-box__option"
-              aria-hidden="true"
-              href="/region/antarctic">Antarctic</a
-            >
+            <a class="select-box__option" href="/region/antarctic">Antarctic</a>
           </li>
           <li>
-            <a class="select-box__option" aria-hidden="true" href="/region/all"
-              >All</a
-            >
+            <a class="select-box__option" href="/region/all">All</a>
           </li>
         </ul>
       </div>

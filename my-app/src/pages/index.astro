@@ -214,6 +214,25 @@ const data = shuffledData.sort((a: Country, b: Country) =>
 
   <!-- Handle filter by continent -->
   <script is:inline>
+    const selectedContinent = sessionStorage.getItem("continent");
+    const continentList = [
+      "africa",
+      "americas",
+      "asia",
+      "europe",
+      "oceania",
+      "antarctic",
+      "all",
+    ];
+    const continentInput = document.querySelectorAll("input[name=Ben]");
+    continentInput.forEach((input) => {
+      console.log(continentList[+input.value - 2] === selectedContinent);
+      if (continentList[+input.value - 2] === selectedContinent) {
+        input.checked = true;
+      }
+    });
+  </script>
+  <script>
     document.addEventListener("astro:page-load", () => {
       const selectedContinent = sessionStorage.getItem("continent");
       const continentList = [
@@ -227,9 +246,11 @@ const data = shuffledData.sort((a: Country, b: Country) =>
       ];
       const continentInput = document.querySelectorAll("input[name=Ben]");
       continentInput.forEach((input) => {
-        console.log(continentList[+input.value - 2] === selectedContinent);
-        if (continentList[+input.value - 2] === selectedContinent) {
-          input.checked = true;
+        if (
+          continentList[+(input as HTMLInputElement).value - 2] ===
+          selectedContinent
+        ) {
+          (input as HTMLInputElement).checked = true;
         }
       });
     });

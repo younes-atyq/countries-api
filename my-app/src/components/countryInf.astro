@@ -99,7 +99,7 @@ const borderCountries = borders
         <span>Border Countries:</span>
         <ul>
           {
-            borders ? (
+            borders.length > 0 ? (
               borders.map((border, i) => {
                 return (
                   <li>

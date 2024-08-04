@@ -29,7 +29,7 @@ const data = shuffledData.sort((a: Country, b: Country) =>
 );
 ---
 
-<Layout title={`${region}`}>
+<Layout title={`${region.slice(0, 1).toUpperCase() + region.slice(1)}`}>
   <div class="search-container container">
     <div class="search-bar">
       <Icon id={"search-icon"} name={"search-icon"} />

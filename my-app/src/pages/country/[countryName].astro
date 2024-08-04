@@ -24,6 +24,6 @@ const { country, countries } = Astro.props as {
 };
 ---
 
-<Layout title={`About ${country.name.common}`}>
+<Layout title={`${country.name.common}`}>
   <CountryInf country={country} countires={countries} />
 </Layout>

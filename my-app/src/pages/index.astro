@@ -2,25 +2,19 @@
 import { Icon } from "astro-icon/components";
 import Layout from "../layouts/Layout.astro";
 import Card from "../components/Card.astro";
-// import dataExample from "../ts/example.js";
-// const res = await fetch("http://localhost:3000/countries");
 import { type Country } from "../ts/types";
-// import dataInfo from "../../data.json";
-// const shuffledData = dataInfo as unknown as Country[];
+
 const contitentList = ["africa", "americas", "asia", "europe", "oceania"];
 const randomContinent =
   contitentList[Math.floor(Math.random() * contitentList.length)];
+
 const res = await fetch(
   "https://restcountries.com/v3.1/region/" + randomContinent
 );
-const shuffledData = await res.json();
-const data = shuffledData.sort((a: Country, b: Country) =>
-  a.name.common > b.name.common ? 1 : -1
-);
-// const data: Country[] = dataExample;
+const data = await res.json();
 ---
 
-<Layout title="Welcome to Astro.">
+<Layout title="Home">
   <div id="main-page">
     <div class="search-container container">
       <div class="search-bar">

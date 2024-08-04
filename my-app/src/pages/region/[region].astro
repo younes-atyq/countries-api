@@ -22,7 +22,11 @@ const res =
   region === "all"
     ? await fetch("https://restcountries.com/v3.1/all")
     : await fetch(`https://restcountries.com/v3.1/region/${region}`);
-const data = (await res.json()) as Country[];
+
+const shuffledData = await res.json();
+const data = shuffledData.sort((a: Country, b: Country) =>
+  a.name.common > b.name.common ? 1 : -1
+);
 ---
 
 <Layout title={`${region}`}>

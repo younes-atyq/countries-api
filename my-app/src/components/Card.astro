@@ -10,7 +10,6 @@ interface Props {
 }
 
 const { countryName, flag, population, region, capital } = Astro.props as Props;
-// console.log({ countryName, flag, population, region, capital });
 ---
 
 <div class="card show" id={countryName} data-contient={region.toLowerCase()}>

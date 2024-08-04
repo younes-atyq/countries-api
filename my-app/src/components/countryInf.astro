@@ -2,10 +2,13 @@
 import slugify from "../ts/slugify";
 import { type Country } from "../ts/types";
 
+// Destructure the props object
 const { country, countires } = Astro.props as {
-  country: Country;
-  countires: Country[];
+  country: Country; // The country object
+  countires: Country[]; // The list of all countries
 };
+
+// Destructure the country object
 const {
   name = { nativeName: "", common: "" },
   tld = [],
@@ -19,21 +22,28 @@ const {
   borders = [],
   maps = { googleMaps: "" },
 } = country;
-// console.log(cca3);
+
+// Get the native name of the country
 const nativeName = name?.nativeName
   ? Object.values(name?.nativeName)[0]?.common
   : "";
+
+// Get the top level domain of the country
 const topLevelDomain = tld ? tld[0] : "";
 
+// Get the names of the currencies used in the country
 const currencyNames = currencies
   ? Object.values(currencies)
       .map((c) => c.name)
       .join(", ")
   : "None";
 
+// Get the link to the border countries
 const borderCountries = borders
   ? borders.map((border) => {
+      // Find the country object of the border
       const borderCountry = countires.find((c) => c.cca3 === border);
+      // Return the link to the border country
       return borderCountry
         ? `/country/${slugify(borderCountry?.name?.common)}`
         : "#";

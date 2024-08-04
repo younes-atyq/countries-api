@@ -12,6 +12,7 @@ import { Icon } from "astro-icon/components";
   </div>
 </header>
 <script>
+  // theme toggle
   const getTheme = (): string => {
     const theme = localStorage.getItem("theme")
       ? localStorage.getItem("theme")
@@ -20,12 +21,15 @@ import { Icon } from "astro-icon/components";
         : "light";
     return theme || "light";
   };
+  // set theme
   document.documentElement.setAttribute("data-theme", getTheme());
+  // toggle theme
   const toggleTheme = () => {
     const theme: string = getTheme() === "light" ? "dark" : "light";
     document.documentElement.setAttribute("data-theme", theme);
     localStorage.setItem("theme", theme);
   };
+
   const themeToggle = document.getElementById("theme-toggle");
   themeToggle?.addEventListener("click", toggleTheme);
 </script>

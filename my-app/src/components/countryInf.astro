@@ -44,16 +44,17 @@ const borderCountries = borders
       // Find the country object of the border
       const borderCountry = countires.find((c) => c.cca3 === border);
       // Return the link to the border country
-      return borderCountry
-        ? `/country/${slugify(borderCountry?.name?.common)}`
-        : "#";
+      return borderCountry ? borderCountry.name.common : "#";
     })
   : "";
 ---
 
 <div class="container country-info-container">
   <button class="back" id="back-btn" title="Back">
-    <span class="arrow">←</span> Back
+    <span class="arrow">←</span>
+    <span class="stay">B</span>
+    <span class="out">ack</span>
+    <span class="in">ACK</span>
   </button>
   <div class="country-info">
     <div class="image">
@@ -108,11 +109,17 @@ const borderCountries = borders
           {
             borders.length > 0 ? (
               borders.map((border, i) => {
+                const link = `/country/${slugify(borderCountries[i])}`;
                 return (
                   <li>
-                    <a href={borderCountries[i]} class="link" title={border}>
-                      {border}
+                    <a
+                      href={borderCountries[i]}
+                      class="link"
+                      title={borderCountries[i]}
+                    >
+                      {borderCountries[i]}
                     </a>
+                    <span>{border}</span>
                   </li>
                 );
               })

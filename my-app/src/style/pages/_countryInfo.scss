@@ -127,6 +127,15 @@
             cursor: pointer;
             overflow: hidden;
             transition: box-shadow $delay;
+            &.long {
+              width: 100px;
+            }
+            &.very-long {
+              width: 120px;
+            }
+            &.extremely-long {
+              width: 140px;
+            }
             &.none {
               cursor: default;
             }

@@ -111,7 +111,13 @@ const borderCountries = borders
               borders.map((border, i) => {
                 const link = `/country/${slugify(borderCountries[i])}`;
                 return (
-                  <li>
+                  <li
+                    class:list={[
+                      borderCountries[i].length > 9 ? "long" : "",
+                      borderCountries[i].length > 13 ? "very-long" : "",
+                      borderCountries[i].length > 17 ? "extremely-long" : "",
+                    ]}
+                  >
                     <a href={link} class="link" title={borderCountries[i]}>
                       {borderCountries[i]}
                     </a>

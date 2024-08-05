@@ -40,13 +40,44 @@ const data = await res.json();
         </form>
       </div>
 
-      <!-- Continent filter dropdown -->
+      <!-- Select box -->
       <div class="select-box">
+        <!-- Current region -->
         <div class="select-box__current" tabindex="1">
           <div class="select-box__value">
-            <input class="select-box__input" type="radio" checked="checked" />
+            <input
+              class="select-box__input"
+              type="radio"
+              id="0"
+              value="1"
+              name="Ben"
+              checked
+            />
             <p class="select-box__input-text">Filter by Region</p>
           </div>
+          <!-- List of regions -->
+          {
+            Object.entries({
+              africa: "Africa",
+              americas: "Americas",
+              asia: "Asia",
+              europe: "Europe",
+              oceania: "Oceania",
+              antarctic: "Antarctic",
+              all: "All",
+            }).map(([key, value]) => (
+              <div class="select-box__value">
+                <input
+                  class="select-box__input"
+                  type="radio"
+                  id={`${key}`}
+                  value={`${key.charAt(0).toUpperCase() + key.slice(1)}`}
+                  name="Ben"
+                />
+                <p class="select-box__input-text">{value}</p>
+              </div>
+            ))
+          }
           <img
             id="select-img-icon"
             class="select-box__icon"
@@ -54,30 +85,25 @@ const data = await res.json();
             alt="Arrow Icon"
           />
         </div>
-
-        <!-- List of continents -->
+        <!-- List of links to regions -->
         <ul class="select-box__list">
-          <li>
-            <a class="select-box__option" href="/region/africa">Africa</a>
-          </li>
-          <li>
-            <a class="select-box__option" href="/region/americas">Americas</a>
-          </li>
-          <li>
-            <a class="select-box__option" href="/region/asia">Asia</a>
-          </li>
-          <li>
-            <a class="select-box__option" href="/region/europe">Europe</a>
-          </li>
-          <li>
-            <a class="select-box__option" href="/region/oceania">Oceania</a>
-          </li>
-          <li>
-            <a class="select-box__option" href="/region/antarctic">Antarctic</a>
-          </li>
-          <li>
-            <a class="select-box__option" href="/region/all">All</a>
-          </li>
+          {
+            Object.entries({
+              africa: "Africa",
+              americas: "Americas",
+              asia: "Asia",
+              europe: "Europe",
+              oceania: "Oceania",
+              antarctic: "Antarctic",
+              all: "All",
+            }).map(([key, value]) => (
+              <li>
+                <a class="select-box__option" href={`/region/${key}`}>
+                  {value}
+                </a>
+              </li>
+            ))
+          }
         </ul>
       </div>
     </div>

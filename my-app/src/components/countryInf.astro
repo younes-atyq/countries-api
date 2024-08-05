@@ -121,7 +121,9 @@ const borderCountries = borders
                     <a href={link} class="link" title={borderCountries[i]}>
                       {borderCountries[i]}
                     </a>
-                    <span>{border}</span>
+                    <a href={link} class="outer-link">
+                      {border}
+                    </a>
                   </li>
                 );
               })

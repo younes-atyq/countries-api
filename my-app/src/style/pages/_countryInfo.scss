@@ -141,15 +141,15 @@
             }
             &:hover {
               box-shadow: 0 1px 6px 1px var(--shadow);
-              a {
+              .link {
                 top: 0;
               }
-              span {
+              .outer-link {
                 top: 200%;
               }
             }
-            a,
-            span {
+            .link,
+            .outer-link {
               position: absolute;
               left: 0;
               width: 100%;
@@ -158,11 +158,11 @@
               transition: top $delay;
               text-align: center;
             }
-            a {
+            .link {
               top: -100%;
               background-color: var(--elements);
             }
-            span {
+            .outer-link {
               top: 0;
             }
           }

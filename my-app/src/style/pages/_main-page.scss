@@ -31,9 +31,14 @@
     border-radius: 3px;
     box-shadow: 0 1px 3px 1px var(--shadow);
     height: 54px;
+    background-color: var(--elements);
+    transition: box-shadow $delay;
+    &:has(.search-input:focus),
+    &:hover {
+      box-shadow: 0 1px 10px 3px var(--shadow);
+    }
 
     // Media query for small screens
-    background-color: var(--elements);
     @include mq("md") {
       width: 100%;
     }
@@ -111,6 +116,11 @@
 
   // Custom select box transition
   .select-box__current:focus + .select-box__list {
+    opacity: 1;
+    -webkit-animation-name: none;
+    animation-name: none;
+  }
+  .select-box__list:has(.select-box__option:focus) {
     opacity: 1;
     -webkit-animation-name: none;
     animation-name: none;
@@ -233,7 +243,16 @@
     transition: transform $delay;
     position: relative;
     display: none;
-
+    transition: transform $delay, box-shadow $delay;
+    // Card on-event styles
+    @include on-event {
+      box-shadow: 0 1px 10px 3px var(--shadow);
+      transform: translateY(-5px);
+    }
+    &:has(a:focus) {
+      box-shadow: 0 1px 10px 3px var(--shadow);
+      transform: translateY(-5px);
+    }
     // Card link
     a {
       position: absolute;
@@ -247,13 +266,6 @@
     // Card show styles
     &.show {
       display: block;
-    }
-
-    // Card hover styles
-    &:hover {
-      transition: transform $delay, box-shadow $delay;
-      box-shadow: 0 1px 10px 3px var(--shadow);
-      transform: translate(0, -5px);
     }
 
     // Card image

@@ -1,0 +1,37 @@
+---
+import { Icon } from "astro-icon/components";
+---
+
+<div class="search-bar" title="Search">
+  <Icon id={"search-icon"} name={"search-icon"} />
+  <form id="form">
+    <input
+      type="text"
+      placeholder="Search for a country..."
+      class="search-input"
+      id="searchTerm"
+      max="24"
+      title="Search"
+    />
+  </form>
+</div>
+<!-- Search function -->
+<script>
+  const form = document.forms[0];
+  const cards = document.querySelectorAll(".card");
+
+  form?.addEventListener("keyup", (e: Event) => {
+    e.preventDefault();
+    const searchTerm = (e.target as HTMLFormElement).value;
+    if (searchTerm.length === 0)
+      return cards.forEach((card) => card.classList.add("show"));
+
+    cards.forEach((card) => {
+      if (card.id.toLowerCase().includes(searchTerm.toLowerCase())) {
+        card.classList.add("show");
+      } else {
+        card.classList.remove("show");
+      }
+    });
+  });
+</script>

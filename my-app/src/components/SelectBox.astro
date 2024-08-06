@@ -1,0 +1,71 @@
+---
+const { region } = Astro.props as { region: string };
+---
+
+<!-- Select box -->
+<div class="select-box">
+  <!-- Current region -->
+  <div class="select-box__current" tabindex="1">
+    <div class="select-box__value">
+      <input
+        class="select-box__input"
+        type="radio"
+        id="1"
+        value="1"
+        name="Ben"
+      />
+      <p class="select-box__input-text">Filter by Region</p>
+    </div>
+    <!-- List of regions -->
+    {
+      Object.entries({
+        africa: "Africa",
+        americas: "Americas",
+        asia: "Asia",
+        europe: "Europe",
+        oceania: "Oceania",
+        antarctic: "Antarctic",
+        all: "All",
+        null: "Filter by Region",
+      }).map(([key, value]) => (
+        <div class="select-box__value">
+          <input
+            class="select-box__input"
+            type="radio"
+            id={`${key}`}
+            value={`${key.charAt(0).toUpperCase() + key.slice(1)}`}
+            name="Ben"
+            checked={region === key}
+          />
+          <p class="select-box__input-text">{value}</p>
+        </div>
+      ))
+    }
+    <img
+      id="select-img-icon"
+      class="select-box__icon"
+      src="http://cdn.onlinewebfonts.com/svg/img_295694.svg"
+      alt="Arrow Icon"
+    />
+  </div>
+  <!-- List of links to regions -->
+  <ul class="select-box__list">
+    {
+      Object.entries({
+        africa: "Africa",
+        americas: "Americas",
+        asia: "Asia",
+        europe: "Europe",
+        oceania: "Oceania",
+        antarctic: "Antarctic",
+        all: "All",
+      }).map(([key, value]) => (
+        <li>
+          <a class="select-box__option" href={`/region/${key}`} title={value}>
+            {value}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</div>

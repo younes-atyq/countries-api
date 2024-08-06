@@ -1,8 +1,9 @@
 ---
 // Import components
-import { Icon } from "astro-icon/components";
 import Layout from "../layouts/Layout.astro";
 import Card from "../components/Card.astro";
+import SearchBar from "../components/SearchBar.astro";
+import SelectBox from "../components/SelectBox.astro";
 import { type Country } from "../ts/types";
 
 // Define list of continents
@@ -24,88 +25,11 @@ const data = await res.json();
   <div id="main-page">
     <!-- Search bar -->
     <div class="search-container container">
-      <div class="search-bar">
-        <!-- Search icon -->
-        <Icon id={"search-icon"} name={"search-icon"} />
-
-        <!-- Search form -->
-        <form id="form">
-          <input
-            type="text"
-            placeholder="Search for a country..."
-            class="search-input"
-            id="searchTerm"
-            max="24"
-          />
-        </form>
-      </div>
+      <!-- Search bar -->
+      <SearchBar />
 
       <!-- Select box -->
-      <div class="select-box">
-        <!-- Current region -->
-        <div class="select-box__current" tabindex="1">
-          <div class="select-box__value">
-            <input
-              class="select-box__input"
-              type="radio"
-              id="0"
-              value="1"
-              name="Ben"
-              checked
-            />
-            <p class="select-box__input-text">Filter by Region</p>
-          </div>
-          <!-- List of regions -->
-          {
-            Object.entries({
-              africa: "Africa",
-              americas: "Americas",
-              asia: "Asia",
-              europe: "Europe",
-              oceania: "Oceania",
-              antarctic: "Antarctic",
-              all: "All",
-            }).map(([key, value]) => (
-              <div class="select-box__value">
-                <input
-                  class="select-box__input"
-                  type="radio"
-                  id={`${key}`}
-                  value={`${key.charAt(0).toUpperCase() + key.slice(1)}`}
-                  name="Ben"
-                />
-                <p class="select-box__input-text">{value}</p>
-              </div>
-            ))
-          }
-          <img
-            id="select-img-icon"
-            class="select-box__icon"
-            src="http://cdn.onlinewebfonts.com/svg/img_295694.svg"
-            alt="Arrow Icon"
-          />
-        </div>
-        <!-- List of links to regions -->
-        <ul class="select-box__list">
-          {
-            Object.entries({
-              africa: "Africa",
-              americas: "Americas",
-              asia: "Asia",
-              europe: "Europe",
-              oceania: "Oceania",
-              antarctic: "Antarctic",
-              all: "All",
-            }).map(([key, value]) => (
-              <li>
-                <a class="select-box__option" href={`/region/${key}`}>
-                  {value}
-                </a>
-              </li>
-            ))
-          }
-        </ul>
-      </div>
+      <SelectBox region="null" />
     </div>
 
     <!-- Country cards -->
@@ -128,76 +52,4 @@ const data = await res.json();
       }
     </div>
   </div>
-
-  <!-- Handle search -->
-  <script>
-    const form = document.forms[0];
-    const cards = document.querySelectorAll(".card");
-
-    // Handle search input
-    form?.addEventListener("keyup", (e: Event) => {
-      e.preventDefault();
-      const searchTerm = (e.target as HTMLFormElement).value;
-      if (searchTerm.length === 0)
-        return cards.forEach((card) => card.classList.add("show"));
-
-      cards.forEach((card) => {
-        if (card.id.toLowerCase().includes(searchTerm.toLowerCase())) {
-          card.classList.add("show");
-        } else {
-          card.classList.remove("show");
-        }
-      });
-    });
-  </script>
-
-  <!-- Handle continent filter -->
-  <script>
-    // Handle page load
-    document.addEventListener("astro:page-load", () => {
-      const selectedContinent = sessionStorage.getItem("continent");
-      const continentList = [
-        "africa",
-        "americas",
-        "asia",
-        "europe",
-        "oceania",
-        "antarctic",
-        "all",
-      ];
-      const continentInput = document.querySelectorAll("input[name=Ben]");
-
-      // Set selected continent
-      continentInput.forEach((input) => {
-        if (
-          continentList[+(input as HTMLInputElement).value - 2] ===
-          selectedContinent
-        ) {
-          (input as HTMLInputElement).checked = true;
-        }
-      });
-    });
-
-    // Handle continent filter change
-    document.addEventListener("astro:page-load", () => {
-      const continentInput = document.querySelectorAll("input[name=Ben]");
-      const continentList = [
-        "africa",
-        "americas",
-        "asia",
-        "europe",
-        "oceania",
-        "antarctic",
-        "all",
-      ];
-      continentInput.forEach((input) => {
-        input.addEventListener("change", (e) => {
-          const theSelectedContinent =
-            continentList[+(e.target as HTMLInputElement).value - 2];
-
-          sessionStorage.setItem("continent", theSelectedContinent);
-        });
-      });
-    });
-  </script>
 </Layout>

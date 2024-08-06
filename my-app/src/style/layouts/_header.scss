@@ -11,8 +11,10 @@
     a {
       font-size: x-large;
       font-weight: bold;
+      padding-inline: 5px;
     }
     #theme-toggle {
+      padding-inline: 5px;
       display: flex;
       align-items: center;
       gap: 10px;

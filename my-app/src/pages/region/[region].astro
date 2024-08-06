@@ -3,7 +3,8 @@
 import Layout from "../../layouts/Layout.astro";
 import Card from "../../components/Card.astro";
 import { type Country } from "../../ts/types.ts";
-import { Icon } from "astro-icon/components";
+import SearchBar from "../../components/SearchBar.astro";
+import SelectBox from "../../components/SelectBox.astro";
 
 export async function getStaticPaths() {
   // Defining the possible regions
@@ -35,84 +36,9 @@ const data = shuffledData.sort((a: Country, b: Country) =>
   <!-- Search bar and select box container -->
   <div class="search-container container">
     <!-- Search bar -->
-    <div class="search-bar">
-      <Icon id={"search-icon"} name={"search-icon"} />
-      <form id="form">
-        <input
-          type="text"
-          placeholder="Search for a country..."
-          class="search-input"
-          id="searchTerm"
-          max="24"
-        />
-      </form>
-    </div>
+    <SearchBar />
     <!-- Select box -->
-    <div class="select-box">
-      <!-- Current region -->
-      <div class="select-box__current" tabindex="1">
-        <div class="select-box__value">
-          <input
-            class="select-box__input"
-            type="radio"
-            id="0"
-            value="1"
-            name="Ben"
-          />
-          <p class="select-box__input-text">Filter by Region</p>
-        </div>
-        <!-- List of regions -->
-        {
-          Object.entries({
-            africa: "Africa",
-            americas: "Americas",
-            asia: "Asia",
-            europe: "Europe",
-            oceania: "Oceania",
-            antarctic: "Antarctic",
-            all: "All",
-          }).map(([key, value]) => (
-            <div class="select-box__value">
-              <input
-                class="select-box__input"
-                type="radio"
-                id={`${key}`}
-                value={`${key.charAt(0).toUpperCase() + key.slice(1)}`}
-                name="Ben"
-                checked={region === key}
-              />
-              <p class="select-box__input-text">{value}</p>
-            </div>
-          ))
-        }
-        <img
-          id="select-img-icon"
-          class="select-box__icon"
-          src="http://cdn.onlinewebfonts.com/svg/img_295694.svg"
-          alt="Arrow Icon"
-        />
-      </div>
-      <!-- List of links to regions -->
-      <ul class="select-box__list">
-        {
-          Object.entries({
-            africa: "Africa",
-            americas: "Americas",
-            asia: "Asia",
-            europe: "Europe",
-            oceania: "Oceania",
-            antarctic: "Antarctic",
-            all: "All",
-          }).map(([key, value]) => (
-            <li>
-              <a class="select-box__option" href={`/region/${key}`}>
-                {value}
-              </a>
-            </li>
-          ))
-        }
-      </ul>
-    </div>
+    <SelectBox region={region} />
   </div>
   <!-- List of cards -->
   <div class="cards-container container">
@@ -128,24 +54,4 @@ const data = shuffledData.sort((a: Country, b: Country) =>
       ))
     }
   </div>
-  <!-- Search function -->
-  <script>
-    const form = document.forms[0];
-    const cards = document.querySelectorAll(".card");
-
-    form?.addEventListener("keyup", (e: Event) => {
-      e.preventDefault();
-      const searchTerm = (e.target as HTMLFormElement).value;
-      if (searchTerm.length === 0)
-        return cards.forEach((card) => card.classList.add("show"));
-
-      cards.forEach((card) => {
-        if (card.id.toLowerCase().includes(searchTerm.toLowerCase())) {
-          card.classList.add("show");
-        } else {
-          card.classList.remove("show");
-        }
-      });
-    });
-  </script>
 </Layout>
